@@ -45,13 +45,14 @@ class RobotRecognizer:
         for line in self.lines:
             caracteres= self.separador(line.strip())
             print ("Caracteres en linea: {}".format(caracteres))
-            return
         
 def reconocedor ():
     archivo=abrir_fichero()
     if archivo is None:
         print("Archivo no encontrado. No se puede ejecutar")
+        return
     else:
-        for linea in archivo:
-            return None
+        robot = RobotRecognizer(archivo)
+        
+        robot.parse()
     
