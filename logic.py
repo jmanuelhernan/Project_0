@@ -5,9 +5,10 @@ data_dir = os.path.dirname(os.path.realpath(__file__))
 def abrir_fichero():
     nombre=str(input("Ingrese el nombre del archivo (debe estar en la misma carpeta que los .py): "))
     ruta = os.path.join(data_dir,nombre)
+    print(f"Buscando archivo en: {ruta}")
     try:
-        fichero=open(ruta, "r")
-        return fichero.readlines()
+        with open(ruta, "r") as fichero:
+            return fichero.readlines()
     except FileNotFoundError:
         print("No se encuentra el archivo")
         return None
