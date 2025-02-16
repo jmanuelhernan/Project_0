@@ -28,6 +28,8 @@ class RobotRecognizer:
         caracteres = ""
         lista_caracteres = []
         for char in line:
+            if char == "|":
+                continue
             if char.isalpha() or char.isdigit() or char in "#_":
                 caracteres += char
             
@@ -58,6 +60,13 @@ class RobotRecognizer:
         else: 
             self.errors.append("Comando desconocido: {}".format(comandos))
     
+    def procesos(self, caracteres):
+        if len(caracteres) < 3 or caracteres[1] in self.instructions:
+            self.errors.append("Error en procesos")
+            return
+        nom_proc = caracteres[1]
+        self.procedures[nom_proc] = [] 
+           
     def validador(self, comandos, args):
         if comandos == "goto":
             if len(args) == 3 and args[1] == "with:" and args[0].isdigit() and args[2].isdigit():
@@ -74,12 +83,12 @@ class RobotRecognizer:
             if args[0] not in ["#north","#south","#west","#east"]:
                 self.errors.append("Error en el comando face")
         elif comandos == "put":
-            if len(args) == 3 and args[1] == "ofType:" and args[0].isdigit() and args[2] in ["#baloons", "#chips"]:
+            if len(args) == 3 and args[1] == "ofType:" and args[0].isdigit() and args[2] in ["#balloons", "#chips"]:
                 return
             else:
                 self.errors.append("Error en el comando put")
         elif comandos == "pick":
-            if len(args) == 3 and args[1] == "ofType:" and args[0].isdigit() and args[2] in ["#baloons", "#chips"]:
+            if len(args) == 3 and args[1] == "ofType:" and args[0].isdigit() and args[2] in ["#balloons", "#chips"]:
                 return
             else:
                 self.errors.append("Error en el comando pick")
