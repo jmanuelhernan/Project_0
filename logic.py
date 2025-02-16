@@ -55,3 +55,27 @@ def reconocedor ():
         robot = RobotRecognizer(archivo)
         
         robot.parse()
+
+def reconocer_goto(dict):
+    if (type(dict["goto"][0]) and type(dict["goto"][1])) is int:
+        return True
+    else:
+        return False
+    
+def reconocer_turn(dict):
+    if dict["turn"] is ("#left" or "#right" or "#around"):
+        return True
+    else:
+        return False
+
+def reconocer_move(dict):
+    if type(dict["move"]) is int:
+        return True
+    else:
+        return False
+    
+def reconocer_face(dict):
+    if dict["face"] is ("#north" or "#south" or "#west"or "#east"):
+        return True
+    else:
+        return False
