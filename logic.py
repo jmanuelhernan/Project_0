@@ -55,4 +55,3 @@ def reconocedor ():
         robot = RobotRecognizer(archivo)
         
         robot.parse()
-    
