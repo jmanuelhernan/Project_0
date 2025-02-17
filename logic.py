@@ -68,7 +68,7 @@ class RobotRecognizer:
         self.procedures[nom_proc] = [] 
            
     def validador(self, comandos, args):
-        if comandos == "goto" or comandos = "goTo":
+        if comandos == "goto" or comandos == "goTo":
             if len(args) == 3 and args[1] == "with:" and args[0].isdigit() and args[2].isdigit():
                 return
             else:
