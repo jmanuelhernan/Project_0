@@ -8,7 +8,7 @@ def abrir_fichero():
     print("Buscando archivo en: ".format(ruta))
     try:
         with open(ruta, "r") as fichero:
-            return fichero.readlines()
+            return [line.strip() for line in fichero.readlines()]
     except FileNotFoundError:
         print("No se encuentra el archivo")
         return None
@@ -27,6 +27,7 @@ class RobotRecognizer:
     def separador (self,line):
         caracteres = ""
         lista_caracteres = []
+        print(f"Tipo de 'line': {type(line)}")
         for char in line:
             if char == "|" or char in "[]":
                 continue
@@ -35,7 +36,7 @@ class RobotRecognizer:
             
             else: 
                 if caracteres:
-                    lista_caracteres.append(caracteres)
+                    lista_caracteres.append(str(caracteres))
                     caracteres = ""
                 if char.strip():
                     lista_caracteres.append(char)
@@ -68,7 +69,8 @@ class RobotRecognizer:
         self.procedures[nom_proc] = [] 
            
     def validador(self, comandos, args):
-        if comandos == "goto" or comandos == "goTo":
+        comandos = comandos.lower()
+        if comandos == "goto":
             if len(args) == 3 and args[1] == "with:" and args[0].isdigit() and args[2].isdigit():
                 return
             else:
