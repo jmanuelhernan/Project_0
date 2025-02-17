@@ -27,7 +27,6 @@ class RobotRecognizer:
     def separador (self,line):
         caracteres = ""
         lista_caracteres = []
-        print(f"Tipo de 'line': {type(line)}")
         for char in line:
             if char == "|" or char in "[]":
                 continue
@@ -69,6 +68,7 @@ class RobotRecognizer:
         self.procedures[nom_proc] = [] 
            
     def validador(self, comandos, args):
+        print(f"Comando: {comandos}, Args: {args}")
         comandos = comandos.lower()
         if comandos == "goto":
             if len(args) == 3 and args[1] == "with:" and args[0].isdigit() and args[2].isdigit():
