@@ -37,7 +37,7 @@ class RobotRecognizer:
                 if caracteres:
                     lista_caracteres.append(str(caracteres))
                     caracteres = ""
-                if char.strip():
+                if char.strip() and char not in [":", "."]:
                     lista_caracteres.append(char)
         if caracteres:
             lista_caracteres.append(caracteres)
