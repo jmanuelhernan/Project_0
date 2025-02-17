@@ -28,7 +28,7 @@ class RobotRecognizer:
         caracteres = ""
         lista_caracteres = []
         for char in line:
-            if char == "|" or "[]":
+            if char == "|" or char in "[]":
                 continue
             if char.isalpha() or char.isdigit() or char in "#_":
                 caracteres += char
@@ -68,7 +68,7 @@ class RobotRecognizer:
         self.procedures[nom_proc] = [] 
            
     def validador(self, comandos, args):
-        if comandos == "goto" or "goTo":
+        if comandos == "goto" or comandos = "goTo":
             if len(args) == 3 and args[1] == "with:" and args[0].isdigit() and args[2].isdigit():
                 return
             else:
