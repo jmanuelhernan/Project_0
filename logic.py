@@ -20,7 +20,8 @@ class RobotRecognizer:
         self.procedures = {}
         self.errors = []
         self.call_stack = []
-        self.instructions = ["move","turn","face","goto","put","pick","jump","if","while","proc","else","nop"]
+        self.instructions = ["nom","move","turn","face","goto","put","pick","jump","if","while","proc","else","nop","putchips","putballoons"]
+        self.variables = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
         
 
     def separador (self,line):
@@ -54,20 +55,19 @@ class RobotRecognizer:
         if not caracteres:
             return
         comandos = caracteres[0].lower()
-        if comandos in self.instructions:
+        if comandos in self.instructions or comandos in self.variables:
             self.validador(comandos, caracteres[1:])
         else: 
             self.errors.append("Comando desconocido: {}".format(comandos))
     
     def procesos(self, caracteres):
-        if len(caracteres) < 3 or caracteres[1] in self.instructions:
+        if len(caracteres) < 3 or caracteres[1] in self.instructions or caracteres[1] in self.variables:
             self.errors.append("Error en procesos")
             return
         nom_proc = caracteres[1]
         self.procedures[nom_proc] = [] 
            
     def validador(self, comandos, args):
-        print(f"Comando: {comandos}, Args: {args}")
         comandos = comandos.lower()
         if comandos == "goto":
             if len(args) == 3 and args[1] == "with" and args[0].isdigit() and args[2].isdigit():
@@ -94,7 +94,7 @@ class RobotRecognizer:
             else:
                 self.errors.append("Error en el comando pick")
         elif comandos == "jump":
-            if len(args) == 3 and (args[1] == "toThe" or args[1] == "inDir") and args[0].isdigit() and args[2] in ["#front", "#right","#left","#back","#north", "#south","#west","#east"]:
+            if len(args) == 3 and (args[1] == "toThe" or args[1] == "inDir") and args[0].isdigit() or args[0] and args[2] in ["#front", "#right","#left","#back","#north", "#south","#west","#east"]:
                 return
             else:
                 self.errors.append("Error en el comando jump")
@@ -106,9 +106,7 @@ class RobotRecognizer:
                 
     def errores(self):
         if self.errors:
-            print("Errores encontrados en el lenguaje: ")
-            for errores in self.errors:
-                print(errores)
+            print("El lenguaje es incorrecto")
         else: 
             print("El lenguaje es correcto.")
         
