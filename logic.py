@@ -98,6 +98,11 @@ class RobotRecognizer:
                 return
             else:
                 self.errors.append("Error en el comando jump")
+        elif comandos == "nop":
+            if len(args) == 0:
+                return
+            else: 
+                self.errors.append("Error en el comando nop")
                 
     def errores(self):
         if self.errors:
