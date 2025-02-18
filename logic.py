@@ -26,24 +26,10 @@ class RobotRecognizer:
     def separador (self,line):
         caracteres = ""
         lista_caracteres = []
-        dentro_variables = False
         for char in line:
-            if char == "|":
-                if dentro_variables:
-                    dentro_variables = False
-                else: 
-                    dentro_variables = True
+            if char == "|" or char in "[]":
                 continue
-            
-            if dentro_variables:
-                if char.isspace():
-                    if caracteres:
-                        self.variables.add(caracteres)
-                        lista_caracteres.append(caracteres)
-                    caracteres = ""
-            else:
-                caracteres += char
-            if char.isalpha() or char.isdigit() or char in "#_:=":
+            if char.isalpha() or char.isdigit() or char in "#_":
                 caracteres += char
             
             else: 
@@ -54,8 +40,6 @@ class RobotRecognizer:
                     lista_caracteres.append(char)
         if caracteres:
             lista_caracteres.append(caracteres)
-            if dentro_variables:
-                self.variables.add(caracteres)
         return lista_caracteres
     
     def parse(self):
