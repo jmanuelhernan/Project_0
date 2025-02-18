@@ -5,7 +5,6 @@ data_dir = os.path.dirname(os.path.realpath(__file__))
 def abrir_fichero():
     nombre=str(input("Ingrese el nombre del archivo (debe estar en la misma carpeta que los .py): "))
     ruta = os.path.join(data_dir,nombre)
-    print("Buscando archivo en: ".format(ruta))
     try:
         with open(ruta, "r") as fichero:
             return [line.strip() for line in fichero.readlines()]
@@ -71,7 +70,7 @@ class RobotRecognizer:
         print(f"Comando: {comandos}, Args: {args}")
         comandos = comandos.lower()
         if comandos == "goto":
-            if len(args) == 3 and args[1] == "with:" and args[0].isdigit() and args[2].isdigit():
+            if len(args) == 3 and args[1] == "with" and args[0].isdigit() and args[2].isdigit():
                 return
             else:
                 self.errors.append("Error en el comando goto")
@@ -85,17 +84,17 @@ class RobotRecognizer:
             if args[0] not in ["#north","#south","#west","#east"]:
                 self.errors.append("Error en el comando face")
         elif comandos == "put":
-            if len(args) == 3 and args[1] == "ofType:" and args[0].isdigit() and args[2] in ["#balloons", "#chips"]:
+            if len(args) == 3 and args[1] == "ofType" and args[0] is [] and args[2] in ["#balloons", "#chips"]:
                 return
             else:
                 self.errors.append("Error en el comando put")
         elif comandos == "pick":
-            if len(args) == 3 and args[1] == "ofType:" and args[0].isdigit() and args[2] in ["#balloons", "#chips"]:
+            if len(args) == 3 and args[1] == "ofType" and args[0].isdigit() and args[2] in ["#balloons", "#chips"]:
                 return
             else:
                 self.errors.append("Error en el comando pick")
         elif comandos == "jump":
-            if len(args) == 3 and (args[1] == "toThe:" or args[1] == "inDir:") and args[0].isdigit() and args[2] in ["#front", "#right","#left","#back","#north", "#south","#west","#east"]:
+            if len(args) == 3 and (args[1] == "toThe" or args[1] == "inDir") and args[0].isdigit() and args[2] in ["#front", "#right","#left","#back","#north", "#south","#west","#east"]:
                 return
             else:
                 self.errors.append("Error en el comando jump")
