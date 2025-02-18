@@ -1,6 +1,6 @@
 move 5
 turn #left
 goto 10 with: 20
-put ofType: #balloons 3
+put 1 ofType: #balloons 3
 pick ofType: #chips 2
 jump toThe: 5 inDir: #front

@@ -27,9 +27,22 @@ class RobotRecognizer:
         caracteres = ""
         lista_caracteres = []
         for char in line:
-            if char == "|" or char in "[]":
+            if char == "|":
+                if dentro_variables:
+                    dentro_variables = False
+                else: 
+                    dentro_variables = True
                 continue
-            if char.isalpha() or char.isdigit() or char in "#_":
+            
+            if dentro_variables:
+                if char.isspace():
+                    if caracteres:
+                        self.variables.add(caracteres)
+                        lista_caracteres.append(caracteres)
+                    caracteres = ""
+            else:
+                caracteres += char
+            if char.isalpha() or char.isdigit() or char in "#_:=":
                 caracteres += char
             
             else: 
@@ -40,6 +53,8 @@ class RobotRecognizer:
                     lista_caracteres.append(char)
         if caracteres:
             lista_caracteres.append(caracteres)
+            if dentro_variables:
+                self.variables.add(caracteres)
         return lista_caracteres
     
     def parse(self):
@@ -84,7 +99,7 @@ class RobotRecognizer:
             if args[0] not in ["#north","#south","#west","#east"]:
                 self.errors.append("Error en el comando face")
         elif comandos == "put":
-            if len(args) == 3 and args[1] == "ofType" and args[0] is [] and args[2] in ["#balloons", "#chips"]:
+            if len(args) == 3 and args[1] == "ofType" and args[0].isdigit() and args[2] in ["#balloons", "#chips"]:
                 return
             else:
                 self.errors.append("Error en el comando put")
