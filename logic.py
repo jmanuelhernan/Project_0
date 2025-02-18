@@ -20,7 +20,7 @@ class RobotRecognizer:
         self.procedures = {}
         self.errors = []
         self.call_stack = []
-        self.instructions = ["move","turn","face","goto","put","pick","jump","if","while","proc"]
+        self.instructions = ["move","turn","face","goto","put","pick","jump","if","while","proc","else","nop"]
         
 
     def separador (self,line):
