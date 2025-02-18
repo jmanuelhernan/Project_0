@@ -1,0 +1,26 @@
+proc addItems: x andY: y [
+    |a, b|
+    a := x.
+    b := y.
+    put: a ofType: #item1.
+    put: b ofType: #item2
+]
+
+proc moveUp [
+    while: canMove: 1 inDir: #up do: [
+        move: 1 inDir: #up.
+    ]
+]
+
+proc moveRight [
+    if: canMove: 1 inDir: #right then: [
+        move: 1 inDir: #right.
+    ] else: [
+        nop.
+    ]
+]
+
+[
+    goTo: 2 with: 5.
+    addItems: 3 andY: 4.
+]

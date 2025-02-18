@@ -53,7 +53,7 @@ class RobotRecognizer:
     def procesador(self, caracteres):
         if not caracteres:
             return
-        comandos = caracteres[0]
+        comandos = caracteres[0].lower()
         if comandos in self.instructions:
             self.validador(comandos, caracteres[1:])
         else: 
