@@ -26,6 +26,7 @@ class RobotRecognizer:
     def separador (self,line):
         caracteres = ""
         lista_caracteres = []
+        dentro_variables = False
         for char in line:
             if char == "|":
                 if dentro_variables:
